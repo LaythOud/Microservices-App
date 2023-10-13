@@ -1,0 +1,38 @@
+
+@{
+    ViewData["Title"] = "Index Admission";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Id
+            </th>
+            <th>
+                StudentName
+            </th>
+            <th>
+                StudentClass
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in (dynamic)(ViewData["admissions"])) {
+        <tr>
+            <td>
+                @item.StudentName
+            </td>
+            <td>
+                @item.StudentClass
+            </td>
+            <td>
+                <a href="/Home/Approve?id=@item.Id">Approve</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

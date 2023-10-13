@@ -1,0 +1,43 @@
+{
+    "Routes": [
+      {
+        "DownstreamPathTemplate": "/api/{Action}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "attendance",
+            "Port": 80
+          }
+        ],
+        "UpstreamPathTemplate": "/Attendance/{Action}",
+        "UpstreamHttpMethod": [ "GET", "POST"]
+      },
+      {
+        "DownstreamPathTemplate": "/api/{Action}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5124
+          }
+        ],
+        "UpstreamPathTemplate": "/Admission/{Action}",
+        "UpstreamHttpMethod": [ "GET", "POST"]
+      },
+      {
+        "DownstreamPathTemplate": "/api/{Action}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "subject",
+            "Port": 80
+          }
+        ],
+        "UpstreamPathTemplate": "/Subject/{Action}",
+        "UpstreamHttpMethod": [ "GET", "POST"]
+      }
+    ],
+    "GlobalConfiguration": {
+      "BaseUrl": "http://localhost:5167"
+    }
+  }
