@@ -1,4 +1,4 @@
-namespace DotNet.Docker.Models;
+namespace APIGateway.Models;
 
 public class ErrorViewModel
 {

@@ -10,7 +10,7 @@ using StudentAdmissionManagement.Data;
 using System.Text.Json;
 
 
-namespace DotNet.Docker.Controllers
+namespace StudentAdmissionManagement.Controllers
 {
     [Route("api/[Action]")]
     public class StudentAdmissionController : Controller
@@ -30,21 +30,21 @@ namespace DotNet.Docker.Controllers
                 var studentAdmissionDetailsModel = new StudentAdmissionDetailsModel
                 {
                     StudentName = "Layth",
-                    StudentClass = "WDC",
+                    StudentClass = "MWS",
                     Approved = false
                 };
 
                 var studentAdmissionDetailsModel2 = new StudentAdmissionDetailsModel
                 {
                     StudentName = "Kais",
-                    StudentClass = "WDC",
+                    StudentClass = "MWS",
                     Approved = false
                 };
 
                 var studentAdmissionDetailsModel3 = new StudentAdmissionDetailsModel
                 {
                     StudentName = "Mohammad",
-                    StudentClass = "WDC",
+                    StudentClass = "MWS",
                     Approved = false
                 };
 

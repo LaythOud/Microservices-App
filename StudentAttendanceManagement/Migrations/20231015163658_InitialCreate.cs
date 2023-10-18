@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace StudentAdmissionManagement.Migrations
+namespace StudentAttendanceManagement.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -11,18 +11,18 @@ namespace StudentAdmissionManagement.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "StudentAdmissionDetailsModel",
+                name: "StudentAttendanceDetails",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StudentClass = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Approved = table.Column<bool>(type: "bit", nullable: false)
+                    StudentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AttendencePercentage = table.Column<double>(type: "float", nullable: false),
+                    StudentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentAdmissionDetailsModel", x => x.Id);
+                    table.PrimaryKey("PK_StudentAttendanceDetails", x => x.Id);
                 });
         }
 
@@ -30,7 +30,7 @@ namespace StudentAdmissionManagement.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "StudentAdmissionDetailsModel");
+                name: "StudentAttendanceDetails");
         }
     }
 }

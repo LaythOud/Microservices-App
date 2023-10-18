@@ -1,6 +1,6 @@
 
 @{
-    ViewData["Title"] = "Index Admission";
+    ViewData["Title"] = "Attendance Details";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -12,16 +12,19 @@
                Id
             </th>
             <th>
-                StudentName
+                Student Name
             </th>
             <th>
-                StudentClass
+                AttendencePercentage
+            </th>
+            <th>
+                AttendencePercentage
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in (dynamic)(ViewData["admissions"])) {
+@foreach (var item in (dynamic)(ViewData["attendanceDetails"])) {
         <tr>
             <td>
                 @item.Id
@@ -30,10 +33,13 @@
                 @item.StudentName
             </td>
             <td>
-                @item.StudentClass
+                @item.AttendencePercentage
             </td>
             <td>
-                <a asp-controller="Home" asp-action="Approve" asp-route-id="@item.Id">Approve</a>
+                @item.StudentStatus
+            </td>
+            <td>
+                <a asp-controller="Home" asp-action="CalcAttendenceStatus" asp-route-id="@item.Id">Show Status</a>
             </td>
         </tr>
 }

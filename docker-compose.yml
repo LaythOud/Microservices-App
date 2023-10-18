@@ -5,16 +5,23 @@ networks:
   backend:
 
 services:
-  # attendance-data: 
-  #   container_name: attendance-sql-server
-  #   image: mcr.microsoft.com/mssql/server:2019-latest
-  #   environment: 
-  #     - SA_PASSWORD=2Secure*Password2
-  #     - ACCEPT_EULA=Y
-  #   ports:
-  #     - "1431:1433"
-  #   networks:
-  #     - backend
+  attendance-data: 
+    container_name: attendance-sql-server
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment: 
+      - SA_PASSWORD=2Secure*Password2
+      - ACCEPT_EULA=Y
+    ports:
+      - "1431:1433"
+    networks:
+      - backend
+    healthcheck:
+        test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "2Secure*Password2" -Q "SELECT 1" -b -o /dev/null
+        interval: 10s
+        timeout: 3s
+        retries: 10
+        start_period: 10s
+
 
   admission-data: 
     container_name: admission-sql-server
@@ -26,52 +33,73 @@ services:
       - "1432:1433"
     networks:
       - backend
+    healthcheck:
+        test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "2Secure*Password2" -Q "SELECT 1" -b -o /dev/null
+        interval: 10s
+        timeout: 3s
+        retries: 10
+        start_period: 10s
 
-  # subject-data: 
-  #   container_name: subject-sql-server
-  #   image: mcr.microsoft.com/mssql/server:2019-latest
-  #   environment: 
-  #     - SA_PASSWORD=2Secure*Password2
-  #     - ACCEPT_EULA=Y
-  #   ports:
-  #     - "1433:1433"
-  #   networks:
-  #     - backend
+  subject-data: 
+    container_name: subject-sql-server
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment: 
+      - SA_PASSWORD=2Secure*Password2
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    networks:
+      - backend
+    healthcheck:
+        test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "2Secure*Password2" -Q "SELECT 1" -b -o /dev/null
+        interval: 10s
+        timeout: 3s
+        retries: 10
+        start_period: 10s
 
-  # apigateway:
-  #   container_name: api-gateway
-  #   image: ${DOCKER_REGISTRY-}apigateway:1.0
-  #   build:
-  #     context: APIGateway/
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5128:80"
-  #   networks:
-  #     - backend
+  apigateway:
+    container_name: api-gateway
+    image: ${DOCKER_REGISTRY-}apigateway:1.0
+    build:
+      context: APIGateway/
+      dockerfile: Dockerfile
+    ports:
+      - "5167:80"
+    networks:
+      - backend
 
-  # attendance:
-  #   container_name: attendance-api
-  #   image: ${DOCKER_REGISTRY-}attendance
-  #   build:
-  #     context: StudentAttendanceManagement/
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - backend
+  attendance:
+    container_name: attendance-api
+    image: ${DOCKER_REGISTRY-}attendance:1.1
+    build:
+      context: StudentAttendanceManagement/
+      dockerfile: Dockerfile
+    depends_on:
+      attendance-data:
+        condition: service_healthy
+    networks:
+      - backend
 
-  # admission:
-  #   container_name: admission-api
-  #   image: ${DOCKER_REGISTRY-}admission:1.0
-  #   build:
-  #     context: StudentAdmissionManagement/
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - backend
+  admission:
+    container_name: admission-api
+    image: ${DOCKER_REGISTRY-}admission:1.1
+    build:
+      context: StudentAdmissionManagement/
+      dockerfile: Dockerfile
+    depends_on:
+      admission-data:
+        condition: service_healthy
+    networks:
+      - backend
 
-  # subject:
-  #   container_name: subject-api
-  #   image: ${DOCKER_REGISTRY-}subject
-  #   build:
-  #     context: RegisterSubject/
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - backend
+  subject:
+    container_name: subject-api
+    image: ${DOCKER_REGISTRY-}subject:1.1
+    build:
+      context: RegisteringSubject/
+      dockerfile: Dockerfile
+    depends_on:
+      subject-data:
+        condition: service_healthy
+    networks:
+      - backend

@@ -17,8 +17,8 @@
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 5124
+            "Host": "subject",
+            "Port": 80
           }
         ],
         "UpstreamPathTemplate": "/Admission/{Action}",
@@ -29,7 +29,7 @@
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": [
           {
-            "Host": "subject",
+            "Host": "admission",
             "Port": 80
           }
         ],

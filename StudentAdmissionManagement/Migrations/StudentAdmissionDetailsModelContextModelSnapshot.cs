@@ -7,7 +7,7 @@ using StudentAdmissionManagement.Data;
 
 #nullable disable
 
-namespace DotNet.Docker.Migrations
+namespace StudentAdmissionManagement.Migrations
 {
     [DbContext(typeof(StudentAdmissionDetailsModelContext))]
     partial class StudentAdmissionDetailsModelContextModelSnapshot : ModelSnapshot

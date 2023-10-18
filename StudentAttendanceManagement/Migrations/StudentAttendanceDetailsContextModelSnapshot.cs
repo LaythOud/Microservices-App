@@ -2,29 +2,26 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using StudentAdmissionManagement.Data;
+using StudentAttendanceManagement.Data;
 
 #nullable disable
 
-namespace StudentAdmissionManagement.Migrations
+namespace StudentAttendanceManagement.Migrations
 {
-    [DbContext(typeof(StudentAdmissionDetailsModelContext))]
-    [Migration("20231008071726_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(StudentAttendanceDetailsContext))]
+    partial class StudentAttendanceDetailsContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("StudentAdmissionManagement.Models.StudentAdmissionDetailsModel", b =>
+            modelBuilder.Entity("StudentAttendanceManagement.Models.StudentAttendanceDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,20 +29,18 @@ namespace StudentAdmissionManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Approved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("StudentClass")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("AttendencePercentage")
+                        .HasColumnType("float");
 
                     b.Property<string>("StudentName")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentStatus")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("StudentAdmissionDetailsModel");
+                    b.ToTable("StudentAttendanceDetails");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using StudentAttendanceManagement.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<StudentAttendanceDetailsContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("StudentAttendanceDetailsContext") ?? throw new InvalidOperationException("Connection string 'StudentAttendanceDetailsContext' not found.")));
 
 // Add services to the container.
 

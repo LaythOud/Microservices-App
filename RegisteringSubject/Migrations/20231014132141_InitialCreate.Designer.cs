@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using StudentAdmissionManagement.Data;
+using RegisterSubject.Data;
 
 #nullable disable
 
-namespace StudentAdmissionManagement.Migrations
+namespace RegisterSubject.Migrations
 {
-    [DbContext(typeof(StudentAdmissionDetailsModelContext))]
-    [Migration("20231008071726_InitialCreate")]
+    [DbContext(typeof(SubjectContext))]
+    [Migration("20231014132141_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -19,12 +19,12 @@ namespace StudentAdmissionManagement.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("StudentAdmissionManagement.Models.StudentAdmissionDetailsModel", b =>
+            modelBuilder.Entity("RegisterSubject.Models.Subject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,20 +32,16 @@ namespace StudentAdmissionManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Approved")
-                        .HasColumnType("bit");
+                    b.Property<int>("NumberOfStudent")
+                        .HasColumnType("int");
 
-                    b.Property<string>("StudentClass")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentName")
+                    b.Property<string>("SubjectName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("StudentAdmissionDetailsModel");
+                    b.ToTable("Subject");
                 });
 #pragma warning restore 612, 618
         }
