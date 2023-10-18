@@ -17,7 +17,7 @@
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": [
           {
-            "Host": "subject",
+            "Host": "admission",
             "Port": 80
           }
         ],
@@ -29,7 +29,7 @@
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": [
           {
-            "Host": "admission",
+            "Host": "subject",
             "Port": 80
           }
         ],

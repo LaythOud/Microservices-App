@@ -13,6 +13,8 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
+    private readonly static string hostname = "apigateway";
+
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
@@ -32,7 +34,7 @@ public class HomeController : Controller
         ViewData["admissions"] = new List<StudentAdmissionDetailsModel>();
 
         try{
-             var location = new Uri($"{Request.Scheme}://{Request.Host}");  
+             var location = new Uri($"{Request.Scheme}://{HomeController.hostname}");  
              var url = location.AbsoluteUri + "Admission/Index";  
             Console.WriteLine("\nURL Caught!");
             Console.WriteLine(url);
@@ -62,7 +64,7 @@ public class HomeController : Controller
         ViewData["subjects"] = new List<Subject>();
 
         try{
-             var location = new Uri($"{Request.Scheme}://{Request.Host}");  
+             var location = new Uri($"{Request.Scheme}://{HomeController.hostname}");  
              var url = location.AbsoluteUri + "Subject/Index";  
             Console.WriteLine("\nURL Caught!");
             Console.WriteLine(url);
@@ -91,7 +93,7 @@ public class HomeController : Controller
         ViewData["attendanceDetails"] = new List<StudentAttendanceDetails>();
 
         try{
-             var location = new Uri($"{Request.Scheme}://{Request.Host}");  
+             var location = new Uri($"{Request.Scheme}://{HomeController.hostname}");  
              var url = location.AbsoluteUri + "Attendance/Index";  
             Console.WriteLine("\nURL Caught!");
             Console.WriteLine(url);
@@ -118,7 +120,7 @@ public class HomeController : Controller
         var client = new HttpClient();
 
         try{
-            var location = new Uri($"{Request.Scheme}://{Request.Host}");  
+            var location = new Uri($"{Request.Scheme}://{HomeController.hostname}");  
             var url = location.AbsoluteUri + "Admission/Edit?id=" + id;  
             Console.WriteLine("\nURL Caught!");
             Console.WriteLine(url);
@@ -144,7 +146,7 @@ public class HomeController : Controller
         var client = new HttpClient();
 
         try{
-            var location = new Uri($"{Request.Scheme}://{Request.Host}");  
+            var location = new Uri($"{Request.Scheme}://{HomeController.hostname}");  
             var url = location.AbsoluteUri + "Subject/Edit?id=" + id;  
             Console.WriteLine("\nURL Caught!");
             Console.WriteLine(url);
@@ -169,7 +171,7 @@ public class HomeController : Controller
         var client = new HttpClient();
 
         try{
-            var location = new Uri($"{Request.Scheme}://{Request.Host}");  
+            var location = new Uri($"{Request.Scheme}://{HomeController.hostname}");  
             var url = location.AbsoluteUri + "Attendance/Edit?id=" + id;  
             Console.WriteLine("\nURL Caught!");
             Console.WriteLine(url);
@@ -189,9 +191,9 @@ public class HomeController : Controller
     }
 
 
-    // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    // public IActionResult Error()
-    // {
-    //     return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    // }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
 }
